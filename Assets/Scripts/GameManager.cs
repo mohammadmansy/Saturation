@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -15,9 +16,12 @@ public class GameManager : MonoBehaviour
             return _instance;
         }
     }
-    public static bool IsMonitorON;
+    public static bool IsMonitorON=false;
+    public static bool IsUpperValveOpen = false, IsLowerValveOpen = false ,IsSwitchOpen = false;
+    public static bool HeaterUp = false, HeaterDown = false;
     public static Material m;
-
+    public TextMeshPro HeaterPowerText ,HeaterPowerText2 ,TempText , TempText2;
+    public static float n ,currentPower, currentTemp, TempAmbient = 25f, DeltaTemp;
 
     void Start()
     {
@@ -33,10 +37,5 @@ public class GameManager : MonoBehaviour
         m.color = Color.green;
         Debug.Log("Hello from gamem Manager");
    }
-
-
-
-
-
-
+   
 }
