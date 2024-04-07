@@ -56,6 +56,7 @@ public class OnAnimation : MonoBehaviour
         {
             if (!GameManager.IsSwitchOpen)
             {
+
                 Anime.SetBool("SwitchOnAndOff", true);
                 GameManager.IsSwitchOpen = true;
             }

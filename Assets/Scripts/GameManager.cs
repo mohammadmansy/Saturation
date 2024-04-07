@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     }
     public static bool IsMonitorON=false;
     public static bool IsUpperValveOpen = false, IsLowerValveOpen = false ,IsSwitchOpen = false;
-    public static bool HeaterUp = false, HeaterDown = false;
+    public static bool HeaterUp = false, HeaterDown = false ,IsBoil;
     public static Material m;
     public TextMeshPro HeaterPowerText ,HeaterPowerText2 ,TempText , TempText2;
     public static float n ,currentPower, currentTemp, TempAmbient = 25f, DeltaTemp;

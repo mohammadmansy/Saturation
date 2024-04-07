@@ -10,7 +10,8 @@ public class RotateObject : MonoBehaviour
 
     public Coroutine rotationCoroutine;
     public Coroutine TempCoroCoroutine;
-
+    //public Animator BoillingAnime;
+    public TemperatureManager temperatureManager;
     //public float n = 0f; // Initial value of n
 
     private void Start()
@@ -24,8 +25,12 @@ public class RotateObject : MonoBehaviour
     // Rotate object function
     public void RotateOn()
     {
-        TempCoroCoroutine = StartCoroutine(ChangeTempCoroutine());
-        rotationCoroutine = StartCoroutine(RotateObjectCoroutine(36f * GameManager.n)); // Multiply target rotation by n
+        if ( GameManager.IsSwitchOpen && GameManager.IsUpperValveOpen)
+        {
+            temperatureManager.StartCoroutine(temperatureManager.UpdateTemperature());
+
+        }
+            rotationCoroutine = StartCoroutine(RotateObjectCoroutine(36f * GameManager.n)); // Multiply target rotation by n
             GameManager.currentPower = Mathf.RoundToInt(3000 * GameManager.n); 
             GameManager.Instance.HeaterPowerText.text = GameManager.currentPower.ToString();
             GameManager.Instance.HeaterPowerText2.text = GameManager.currentPower.ToString();
@@ -34,8 +39,8 @@ public class RotateObject : MonoBehaviour
     public void RotateOff()
     {
 
-        TempCoroCoroutine = StartCoroutine(ChangeTempCoroutine());
-        rotationCoroutine = StartCoroutine(RotateObjectCoroutine(-36f * GameManager.n)); // Multiply target rotation by n
+            //TempCoroCoroutine = StartCoroutine(ChangeTempCoroutine());
+            rotationCoroutine = StartCoroutine(RotateObjectCoroutine(-36f * GameManager.n)); // Multiply target rotation by n
             GameManager.currentPower = Mathf.RoundToInt(3000 * GameManager.n); // Adjust currentPower based on n
             GameManager.Instance.HeaterPowerText.text = GameManager.currentPower.ToString();
             GameManager.Instance.HeaterPowerText2.text = GameManager.currentPower.ToString();
@@ -54,32 +59,52 @@ public class RotateObject : MonoBehaviour
             yield return null;
         }
     }
-    IEnumerator ChangeTempCoroutine()
-    {
-       // Vector3 tempDirection = (targetTemp >= 0) ? Vector3.left : Vector3.right;
-        GameManager.DeltaTemp = (150f * GameManager.n) / 8.368f;
-        float timeElapsed = 0f;
+    //IEnumerator ChangeTempCoroutine(float temp)
+    //{
+    //    // float baseTemperatureChangeRate = 150f;
+    //    // float exponent = 8.368f;
+    //    //float maxTemperature = 100f;
+    //    //float initialTemp = 25f;
 
-        //while (GameManager.DeltaTemp < Mathf.Abs(targetTemp))
-        //{
-            // Calculate deltaTemp for this frame
-           // float deltaTempThisFrame = GameManager.DeltaTemp * Time.deltaTime;
+    //    float deltaT = temp * Time.deltaTime;
+    //    //GameManager.currentTemp = initialTemp + deltaT;
 
-        // Add deltaTemp to DeltaTemp
-       // GameManager.DeltaTemp += Mathf.RoundToInt(deltaTempThisFrame);
+    //    //while (GameManager.currentTemp < maxTemperature)
+    //    //{
+    //    //    GameManager.currentTemp += deltaT;
+    //    //    GameManager.currentTemp = Mathf.Min(GameManager.currentTemp, maxTemperature);
+    //    //    if (GameManager.currentTemp >= 100 && GameManager.IsUpperValveOpen && GameManager.IsLowerValveOpen)
+    //    //    {
+    //    //        GameManager.IsBoil = true;
+    //    //        BoillingAnime.SetTrigger("Boiling");
+    //    //        if (Input.GetKeyDown(KeyCode.Space))
+    //    //        {
+    //    //            GameManager.IsBoil = false;
+    //    //            BoillingAnime.SetTrigger("NonBoilling");
+    //    //            Debug.Log("kakakakaka");
+    //    //        }
 
-        // Update currentTemp
-        GameManager.currentTemp = GameManager.DeltaTemp+GameManager.TempAmbient;
-            GameManager.currentTemp = Mathf.Min(GameManager.currentTemp, 100f);
-            GameManager.Instance.TempText.text = GameManager.currentTemp.ToString();
-            GameManager.Instance.TempText2.text = GameManager.currentTemp.ToString();
+    //    //    }
 
-            // Update time elapsed
-            timeElapsed += Time.deltaTime;
+    //    //    //GameManager.currentTemp = Mathf.Round(GameManager.currentTemp);
+    //    //    GameManager.Instance.TempText.text = GameManager.currentTemp.ToString();
+    //    //    GameManager.Instance.TempText2.text = GameManager.currentTemp.ToString();
+    //    yield return null;
+    //    //}
 
-            yield return null;
-        }
-    }
+
+    //}
+    //public float StoreTemp() 
+    //{
+    //    GameManager.currentTemp = GameManager.TempAmbient;
+    //    GameManager.DeltaTemp = (150 * GameManager.n) / 8.368f;
+    //    GameManager.currentTemp += GameManager.DeltaTemp; 
+    //    Debug.Log((GameManager.currentTemp));
+    //    StartCoroutine(ChangeTempCoroutine(GameManager.currentTemp));
+    //    return GameManager.currentTemp;
+    //}
+
+}
 
 
 
