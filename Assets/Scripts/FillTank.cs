@@ -5,17 +5,17 @@ using UnityEngine.UI;
 
 public class FillTank : MonoBehaviour
 {
-    public Transform fillLevel; // This is a GameObject representing the filling level inside the cylinder
-    public float fillSpeed = 0.2f; // Speed at which the cylinder fills/empties
-    public bool valveOpen = false; // Track whether the valve is open or closed
-    public float upperLimit = 1f; // Upper limit of the fill level
+    public Transform fillLevel; 
+    public float fillSpeed = 0.2f;
+    public bool valveOpen = false; 
+    public float upperLimit = 1f; 
     public float lowerLimit = 0f; 
 
     void Update()
     {
         if (GameManager.IsMonitorON)
         {
-            if (GameManager.IsUpperValveOpen && GameManager.IsLowerValveOpen)
+            if ( GameManager.IsLowerValveOpen)
             {
                 fillLevel.localScale += new Vector3(0, 0, fillSpeed * Time.deltaTime);
             }
@@ -23,7 +23,7 @@ public class FillTank : MonoBehaviour
         }
         else
         {
-            if (GameManager.IsUpperValveOpen && GameManager.IsLowerValveOpen)
+            if ( GameManager.IsLowerValveOpen)
             {
                 fillLevel.localScale -= new Vector3(0, 0, fillSpeed * Time.deltaTime);
             }
@@ -38,14 +38,4 @@ public class FillTank : MonoBehaviour
         );
     }
 
-    //public void OpenValve()
-    //{
-    //    valveOpen = true;
-        
-    //}
-
-    //public void CloseValve()
-    //{
-    //    valveOpen = false;
-    //}
 }

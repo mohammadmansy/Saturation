@@ -6,35 +6,21 @@ using UnityEngine;
 public class OnAnimation : MonoBehaviour
 {
     public static event Action<float> OnFillAmountChanged;
-    //public GameObject Valve;
     public Animator Anime;
     private float currentFillAmount = 0;
     private void OnMouseUpAsButton()
     {
-        //GetComponent<Animator>().gameObject.SetActive(true);
-        //Valve.SetActive(true);
-        //if (Anime.SetBool=true )
         if(CompareTag("Upper Valve"))
         {
             if (!GameManager.IsUpperValveOpen)
             {
                 Anime.SetBool("TurnOnAndOff", true);
-                //Anime.SetBool("TurnOn", false);
-                //else
-                //  Anime.SetBool("TurnOff", true);
-
-                //ChangeFillAmount(currentFillAmount);
                 GameManager.IsUpperValveOpen = true;
             }
             else
             {
                 Anime.SetBool("TurnOnAndOff", true);
-                //Anime.SetBool("TurnOn", false);
-                //else
-                //  Anime.SetBool("TurnOff", true);
-
                 Debug.Log("HiDown");
-                //ChangeFillAmount(currentFillAmount);
                 GameManager.IsUpperValveOpen = false;
             }
 
@@ -67,8 +53,6 @@ public class OnAnimation : MonoBehaviour
             }
 
         }
-
-
 
 
     }

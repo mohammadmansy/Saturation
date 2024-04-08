@@ -14,8 +14,6 @@ public class TurnOnButton : MonoBehaviour
     {
         if (Monitor.activeInHierarchy == false)
         {
-            //GameManager.Instance.TurnMonitorOff();
-            //GameManager.IsMonitorON = true;
             Monitor.SetActive(true);
             Temp.SetActive(true);
             Power.SetActive(true);

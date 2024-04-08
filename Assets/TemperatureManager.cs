@@ -5,51 +5,125 @@ using UnityEngine.UI;
 
 public class TemperatureManager : MonoBehaviour
 {
-    // GameManager variables
     public float currentTemp = 25f;
-    public float n = 1f; // You can adjust this value as needed
+    public float n = .1f; 
     public Animator BoillingAnime;
+    public Animator NonBoillingAnime;
+
     public Image TempBarImage;
 
-    // Update interval
-    public float updateInterval = 1f; // in seconds
+    public float updateInterval = 1f;
 
-    // Delta temperature calculation
     private float CalculateDeltaTemp()
     {
         return (150 * n) / 8.368f;
     }
 
-    // Update temperature every second
     public IEnumerator UpdateTemperature()
     {
-        while (GameManager.IsSwitchOpen)
+        while (true)
         {
-            // Calculate delta temperature
-            float deltaTemp = CalculateDeltaTemp();
-
-            // Update current temperature
-            currentTemp += Mathf.Round( deltaTemp*Time.deltaTime);
-            GameManager.Instance.TempText.text = currentTemp.ToString();
-            GameManager.Instance.TempText2.text = currentTemp.ToString();
-            TempBarImage.fillAmount = currentTemp / 200f;
-
-            // Output current temperature
-            Debug.Log("Current Temperature: " + currentTemp);
-            Debug.Log(GameManager.IsSwitchOpen);
-            if (currentTemp >=100) 
+            if (GameManager.IsSwitchOpen)
             {
-                       GameManager.IsBoil = true;
-                       BoillingAnime.SetTrigger("Boiling");
+                float deltaTemp = CalculateDeltaTemp();
+
+                currentTemp += Mathf.Round(deltaTemp * Time.deltaTime);
+                GameManager.Instance.TempText.text = currentTemp.ToString();
+                GameManager.Instance.TempText2.text = currentTemp.ToString();
+                TempBarImage.fillAmount = currentTemp / 200f;
+
+                if (currentTemp >= 100)
+                {
+                    Debug.Log(GameManager.IsLowerValveOpen);
+                    GameManager.IsBoil = true;
+                    BoillingAnime.SetBool("IsBoilling", true);
+                    if (currentTemp <= 100)
+                    {
+
+                        BoillingAnime.SetBool("IsBoilling", true);
+                    }
+                }
+                //if (GameManager.IsLowerValveOpen)
+                //{
+                //    deltaTemp = 0;
+                //    Debug.Log("kkkkk");
+                //}
 
             }
+            //else if (GameManager.IsSwitchOpen)
+            //{
+            //    float deltaTemp = CalculateDeltaTemp();
+            //    currentTemp -= Mathf.Round(deltaTemp * Time.deltaTime);
+            //    currentTemp = Mathf.Max(currentTemp, 25f); // Ensure temperature doesn't go below 0
+            //    GameManager.Instance.TempText.text = currentTemp.ToString();
+            //    GameManager.Instance.TempText2.text = currentTemp.ToString();
+            //    TempBarImage.fillAmount = currentTemp / 200f;
+            //    if (currentTemp < 100)
+            //    {
+            //        GameManager.IsBoil = false;
+            //        //NonBoillingAnime.SetBool("NotBoilling", true);
+            //        BoillingAnime.SetBool("IsBoilling", false);
+
+            //    }
+            //    else
+            //    {
+            //        BoillingAnime.SetBool("IsBoilling", true);
+
+            //    }
+
+
+            //}
+            else if (/*!GameManager.IsSwitchOpen||*/GameManager.IsLowerValveOpen)
+            {
+                Debug.Log(GameManager.IsLowerValveOpen);
+
+                float test = CalculateDeltaTemp();
+                currentTemp -= Mathf.Round(test * Time.deltaTime);
+                currentTemp = Mathf.Max(currentTemp, 25f); // Ensure temperature doesn't go below 0
+                GameManager.Instance.TempText.text = currentTemp.ToString();
+                GameManager.Instance.TempText2.text = currentTemp.ToString();
+                TempBarImage.fillAmount = currentTemp / 200f;
+                if (currentTemp < 100)
+                {
+                    GameManager.IsBoil = false;
+                    BoillingAnime.SetBool("IsBoilling", false);
+
+                }
+                else
+                {
+                    BoillingAnime.SetBool("IsBoilling", true);
+
+                }
+
+            }
+            else if (!GameManager.IsSwitchOpen )
+            {
+                Debug.Log(GameManager.IsLowerValveOpen);
+
+                float test = CalculateDeltaTemp();
+                currentTemp -= Mathf.Round(test * Time.deltaTime);
+                currentTemp = Mathf.Max(currentTemp, 25f); // Ensure temperature doesn't go below 0
+                GameManager.Instance.TempText.text = currentTemp.ToString();
+                GameManager.Instance.TempText2.text = currentTemp.ToString();
+                TempBarImage.fillAmount = currentTemp / 200f;
+                if (currentTemp < 100)
+                {
+                    GameManager.IsBoil = false;
+                    BoillingAnime.SetBool("IsBoilling", false);
+
+                }
+                else
+                {
+                    BoillingAnime.SetBool("IsBoilling", true);
+
+                }
+
+            }
+
             yield return new WaitForSeconds(updateInterval);
+
         }
+
     }
 
-    private void Start()
-    {
-        // Start updating temperature
-        //StartCoroutine(UpdateTemperature());
-    }
 }

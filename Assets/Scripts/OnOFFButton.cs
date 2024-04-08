@@ -10,7 +10,6 @@ public class OnOFFButton : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -20,7 +19,6 @@ public class OnOFFButton : MonoBehaviour
         if (Monitor.activeInHierarchy == true)
         {
             Monitor.SetActive(false);
-            Debug.Log("eeeeeee");
         }
         else
             Monitor.SetActive(true);

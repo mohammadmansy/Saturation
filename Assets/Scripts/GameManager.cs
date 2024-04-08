@@ -35,7 +35,6 @@ public class GameManager : MonoBehaviour
    public void TurnMonitorOff()
    {
         m.color = Color.green;
-        Debug.Log("Hello from gamem Manager");
    }
    
 }
