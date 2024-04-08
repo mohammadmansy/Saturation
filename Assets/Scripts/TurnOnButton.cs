@@ -9,6 +9,8 @@ public class TurnOnButton : MonoBehaviour
     public GameObject Monitor;
     public GameObject Temp;
     public GameObject Power;
+    public Renderer ButtonON;
+    public TurnOffButton instance;
 
     private void OnMouseUpAsButton()
     {
@@ -17,7 +19,13 @@ public class TurnOnButton : MonoBehaviour
             Monitor.SetActive(true);
             Temp.SetActive(true);
             Power.SetActive(true);
-            GetComponent<Renderer>().material.color = Color.green;
+            ButtonON.material.color = Color.green;
+            if (instance.ButtonOff.material.color == Color.red)
+            {
+                instance.ButtonOff.material.color = Color.white;
+
+            }
+
             GameManager.IsMonitorON = true;
             GameManager.Instance.TempText.text = "25";
             GameManager.Instance.TempText2.text = "25";

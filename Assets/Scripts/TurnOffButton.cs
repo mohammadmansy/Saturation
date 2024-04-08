@@ -7,7 +7,8 @@ public class TurnOffButton : MonoBehaviour
     public GameObject Monitor;
     public GameObject Temp;
     public GameObject Power;
-
+    public Renderer ButtonOff;
+    public TurnOnButton instance;
     private void OnMouseUpAsButton()
     {
         if (Monitor.activeInHierarchy == true)
@@ -17,7 +18,13 @@ public class TurnOffButton : MonoBehaviour
             Temp.SetActive(false);
             Power.SetActive(false);
 
-            GetComponent<Renderer>().material.color = Color.red;
+            ButtonOff.material.color = Color.red;
+
+            if (instance.ButtonON.material.color == Color.green)
+            {
+                instance.ButtonON.material.color = Color.white;
+            }
+
             GameManager.IsMonitorON = false;
             GameManager.Instance.TempText.text = "25";
             GameManager.Instance.TempText2.text = "25";

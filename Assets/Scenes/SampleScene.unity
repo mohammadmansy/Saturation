@@ -1455,7 +1455,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 1
+  m_FillAmount: 0.25
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -11918,6 +11918,8 @@ MonoBehaviour:
   Monitor: {fileID: 1476934778349488607}
   Temp: {fileID: 952055199}
   Power: {fileID: 2063677032}
+  ButtonOff: {fileID: 2173173658290172558}
+  instance: {fileID: 8176309196362715210}
 --- !u!136 &7964218953710453345
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -12385,6 +12387,8 @@ MonoBehaviour:
   Monitor: {fileID: 1476934778349488607}
   Temp: {fileID: 952055199}
   Power: {fileID: 2063677032}
+  ButtonON: {fileID: 4651114932513560436}
+  instance: {fileID: 7964218953710453344}
 --- !u!136 &8176309196362715211
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -2,22 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test1 : MonoBehaviour
+public class PowerDown : MonoBehaviour
 {
     private void OnMouseDown()
     {
         if (GameManager.IsSwitchOpen)
         {
-            GameManager.HeaterUp = true;
-            GameManager.n += 0.1f;
-
-            if (GameManager.n > 1.1)
+            GameManager.HeaterDown = true;
+            GameManager.n -= 0.1f;
+            if (GameManager.n <= -.1)
             {
-                GameManager.n = 1;
+                GameManager.n = 0;
                 return;
             }
-
-            RotateObject.Instance.RotateOn();
+            RotateObject.Instance.RotateOff();
 
         }
     }
@@ -29,6 +27,5 @@ public class Test1 : MonoBehaviour
     {
         GetComponent<Renderer>().material.color = Color.white;
     }
-
 
 }
