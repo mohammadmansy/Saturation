@@ -417,7 +417,7 @@ Transform:
   m_GameObject: {fileID: 788130498}
   serializedVersion: 2
   m_LocalRotation: {x: -0.968832, y: -0.0955204, z: 0.089642465, w: -0.21024914}
-  m_LocalPosition: {x: -0.3034, y: 0.913, z: 0.0219}
+  m_LocalPosition: {x: -0.2682, y: 0.913, z: 0.0107}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -534,7 +534,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 538659aa99c06084bacc12e440d850fe, type: 2}
+  - {fileID: 2100000, guid: 5d459eadb6e07ed44b8ec74f16fccd39, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -594,7 +594,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTemp: 25
-  n: 1
   BoillingAnime: {fileID: 9112891572852889980}
   NonBoillingAnime: {fileID: 9112891572852889980}
   TempBarImage: {fileID: 2001545107}
@@ -13857,7 +13856,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76526f194468517439fe01c8e0f2e7fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BoillingAnime: {fileID: 9112891572852889980}
 --- !u!1 &9134735111447040192
 GameObject:
   m_ObjectHideFlags: 0

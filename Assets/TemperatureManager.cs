@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class TemperatureManager : MonoBehaviour
 {
     public float currentTemp = 25f;
-    public float n = .1f; 
     public Animator BoillingAnime;
     public Animator NonBoillingAnime;
 
@@ -16,18 +15,19 @@ public class TemperatureManager : MonoBehaviour
 
     private float CalculateDeltaTemp()
     {
-        return (150 * n) / 8.368f;
+        return (150 * GameManager.n) / 8.368f;
     }
 
     public IEnumerator UpdateTemperature()
     {
         while (true)
         {
+            float deltaTemp = CalculateDeltaTemp();
+
             if (GameManager.IsSwitchOpen)
             {
-                float deltaTemp = CalculateDeltaTemp();
 
-                currentTemp += Mathf.Round(deltaTemp * Time.deltaTime);
+                currentTemp += deltaTemp;
                 GameManager.Instance.TempText.text = currentTemp.ToString();
                 GameManager.Instance.TempText2.text = currentTemp.ToString();
                 TempBarImage.fillAmount = currentTemp / 200f;
@@ -73,12 +73,11 @@ public class TemperatureManager : MonoBehaviour
 
 
             //}
-            else if (/*!GameManager.IsSwitchOpen||*/GameManager.IsLowerValveOpen)
+            else if (GameManager.IsSwitchOpen &&GameManager.IsLowerValveOpen)
             {
                 Debug.Log(GameManager.IsLowerValveOpen);
 
-                float test = CalculateDeltaTemp();
-                currentTemp -= Mathf.Round(test * Time.deltaTime);
+                currentTemp -= deltaTemp;
                 currentTemp = Mathf.Max(currentTemp, 25f); // Ensure temperature doesn't go below 0
                 GameManager.Instance.TempText.text = currentTemp.ToString();
                 GameManager.Instance.TempText2.text = currentTemp.ToString();
@@ -96,12 +95,10 @@ public class TemperatureManager : MonoBehaviour
                 }
 
             }
-            else if (!GameManager.IsSwitchOpen )
+            else if (!GameManager.IsSwitchOpen || GameManager.IsLowerValveOpen)
             {
-                Debug.Log(GameManager.IsLowerValveOpen);
 
-                float test = CalculateDeltaTemp();
-                currentTemp -= Mathf.Round(test * Time.deltaTime);
+                currentTemp -= deltaTemp;
                 currentTemp = Mathf.Max(currentTemp, 25f); // Ensure temperature doesn't go below 0
                 GameManager.Instance.TempText.text = currentTemp.ToString();
                 GameManager.Instance.TempText2.text = currentTemp.ToString();
@@ -119,6 +116,8 @@ public class TemperatureManager : MonoBehaviour
                 }
 
             }
+            Debug.Log($"{GameManager.n}  {deltaTemp} ");
+
 
             yield return new WaitForSeconds(updateInterval);
 
